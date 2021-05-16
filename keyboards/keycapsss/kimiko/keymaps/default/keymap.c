@@ -29,7 +29,9 @@ enum layers {
 #define LOWER MO(_LOWER)
 #define LWR_DEL (LT(_LOWER, KC_DEL))
 #define RSE_BS (LT(_RAISE, KC_BSPC))
-#define LCS(kc) (QK_LCTL | QK_LSFT | (kc))
+#define LCS(kc) (QK_LCTL | QK_LSFT | kc)
+#define LGS(kc) (QK_LGUI | QK_LSFT | kc)
+#define LAS(kc) (QK_LALT | QK_LSFT | kc)
 //#define KC_LT (LCS(KC_COMM))
 //#define KC_GT (LCS(KC_DOT))
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -71,9 +73,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_LOWER] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_MINS, KC_UNDS, KC_KP_PLUS,
-    _______, _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC,                   KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_EQL,  _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_PIPE, KC_BSLS, _______, _______, _______, _______,
+    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_MINS, KC_PLUS, _______,
+    _______, KC_UNDS, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC,                   KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_EQL,  _______,
+    _______, KC_QUES, KC_COMM, KC_QUOTE,KC_GRAVE,KC_DQUO, _______, _______, KC_PIPE, KC_BSLS, KC_SLSH, KC_TILD, _______, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 /* RAISE
@@ -89,19 +91,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               |      |      |      |     |       /       \      \     |      |      |      |      |
  *               `---------------------------------'         '---------------------------------------'
  */
-
+// Copy and paste (mac os x style)
+#define OP_COPY LGUI(KC_C)
+#define OP_PASTE LGUI(KC_V)
+// Beginning and end of the file (emacs style)
+#define OP_TOP LAS(KC_LT)
+#define OP_BOT LAS(KC_GT)
+// Beginning and end of the line (emacs style)
+#define OP_BEG LCTL(KC_A)
+#define OP_END LCTL(KC_E)
 [_RAISE] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______,
-    _______, KC_PGUP, _______, _______, _______, _______,                     _______, _______, KC_UP,   _______, _______, _______,
-    _______, KC_PGDN, _______, _______, _______, _______,                     _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, _______,
-    _______, _______, _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______, _______, _______, 
+    _______, KC_PGUP, OP_TOP,  OP_BEG,  _______, _______,                     _______, _______, KC_UP,   _______, _______, _______,
+    _______, KC_PGDN, OP_BOT,  OP_END,  _______, _______,                     _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, _______,
+    _______, _______, _______, OP_COPY, OP_PASTE, _______,  _______, _______,  _______, _______, _______, _______, _______, _______, 
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
 /* ADJUST (Press LOWER and RAISE together)
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |RESET |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |RGB ON| HUE+ | SAT+ | VAL+ |      |      |                    | PREV | PLAY | NEXT |      |      |      |
+ * |RGBON| HUE+ | SAT+ | VAL+ |      |      |                    | PREV | PLAY | NEXT |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | MODE | HUE- | SAT- | VAL- |      |      |-------.    ,-------| VOL+ | MUTE | VOL- |      |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -113,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJUST] = LAYOUT(
     _______, _______, KC_MUTE, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    _______, KC_BRMU, KC_VOLU, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    RGB_TOG, KC_BRMU, KC_VOLU, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, KC_BRMD, KC_VOLD, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                       _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______
@@ -341,7 +351,7 @@ void oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        render_status_secondary();
+        render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     }
 }
 
