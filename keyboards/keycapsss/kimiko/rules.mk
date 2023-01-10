@@ -22,4 +22,6 @@ BLUETOOTH_ENABLE = no       # Enable Bluetooth
 AUDIO_ENABLE = no           # Audio output
 SPLIT_KEYBOARD = yes
 
+COMBO_ENABLE = yes
+
 DEFAULT_FOLDER = keycapsss/kimiko/rev1
