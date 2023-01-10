@@ -30,6 +30,7 @@ enum layers {
 #define QWERTY   DF(_QWERTY)
 #define COLEMAK  DF(_COLEMAK_DH)
 #define DVORAK   DF(_DVORAK)
+#define LCS(kc) (QK_LCTL | QK_LSFT | kc)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
@@ -272,8 +273,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
              else tap_code(KC_PGDN);
              break;
            case _SYM:
-             if (clockwise) tap_code16(LCTL(KC_TAB));
-             else tap_code16(C_S_T(KC_TAB));
+             // Browser tabs forward and backward
+             if (clockwise) tap_code16(LCS(KC_TAB));
+             else tap_code16(LCTL(KC_TAB));
              break;
            case _NAV:
              if (clockwise) tap_code(KC_BRMU);
