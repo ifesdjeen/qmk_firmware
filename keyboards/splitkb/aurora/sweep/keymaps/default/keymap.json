@@ -18,14 +18,14 @@
         ],
         [
             "KC_QUOT"     , "KC_EXLM"     , "KC_AT"          , "KC_HASH"       , "KC_TRNS"       , "KC_PGUP"       , "LCS(KC_TAB)"  , "KC_UP"           , "LCMD (KC_TAB)"  , "KC_TRNS",
-            "KC_TRNS"     , "KC_DLR"      , "KC_PERC"        , "KC_CIRC"       , "KC_TRNS"       , "KC_PGDN"       , "KC_LEFT"      , "KC_DOWN"         , "KC_RGHT"        , "KC_TRNS",
+            "KC_DQUO"     , "KC_DLR"      , "KC_PERC"        , "KC_CIRC"       , "KC_TRNS"       , "KC_PGDN"       , "KC_LEFT"      , "KC_DOWN"         , "KC_RGHT"        , "KC_TRNS",
             "KC_TRNS"     , "KC_AMPR"     , "KC_ASTR"        , "KC_DQUO"       , "KC_TRNS"       , "LCTL(KC_SLSH)" , "LCS(KC_SLSH)" , "LCTL(KC_LEFT)"   , "LCTL(KC_RIGHT)" , "KC_TRNS",
                                                                "KC_TRNS"       , "KC_DEL"        , "KC_TRNS"       , "KC_TRNS"
         ],
         [
-            "KC_F1"       , "KC_F2"       , "KC_F3"          , "KC_F4"         , "KC_TRNS"       , "ALLMOD(KC_U)"       , "ALLMOD(KC_I)"     , "ALLMOD(KC_O)"        , "KC_BRMU"       , "KC_VOLU",
-            "KC_F5"       , "KC_F6"       , "KC_F7"          , "KC_F8"         , "KC_TRNS"       , "ALLMOD(KC_J)"       , "ALLMOD(KC_K)"     , "ALLMOD(KC_L)"        , "KC_BRMD"       , "KC_VOLD",
-            "KC_F9"       , "KC_F10"      , "KC_F11"         , "KC_F12"        , "KC_TRNS"       , "ALLMOD(KC_M)"       , "ALLMOD(KC_M)"     , "ALLMOD(KC_DOT)"        , "KC_TRNS"       , "KC_TRNS",
+            "KC_F1"       , "KC_F2"       , "KC_F3"          , "KC_F4"         , "RGB_TOG"       , "ALLMOD(KC_U)"       , "ALLMOD(KC_I)"     , "ALLMOD(KC_O)"        , "KC_BRMU"       , "KC_VOLU",
+            "KC_F5"       , "KC_F6"       , "KC_F7"          , "KC_F8"         , "RGB_MOD"       , "ALLMOD(KC_J)"       , "ALLMOD(KC_K)"     , "ALLMOD(KC_L)"        , "KC_BRMD"       , "KC_VOLD",
+            "KC_F9"       , "KC_F10"      , "KC_F11"         , "KC_F12"        , "RGB_HUI"       , "ALLMOD(KC_M)"       , "ALLMOD(KC_M)"     , "ALLMOD(KC_DOT)"        , "KC_TRNS"       , "KC_TRNS",
                                                                "KC_TRNS"      , "KC_TRNS"       , "KC_TRNS"       , "KC_TRNS"
         ]
     ],
@@ -33,7 +33,7 @@
         "features": {
             "oled": true,
             "rgb_matrix": true,
-            "rgblight": false
+            "rgblight": true
         },
         "encoder": {
             "enabled": false
