@@ -19,7 +19,6 @@ enum layers {
     _QWERTY = 0,
     _NAV,
     _SYM,
-    _FUNCTION,
     _ADJUST,
 };
 
@@ -32,7 +31,6 @@ enum layers {
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
-#define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
@@ -61,10 +59,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,    KC_T,                                     KC_Y,     KC_U,   KC_I,    KC_O,      KC_P,  KC_BSPC,
-     CTL_ESC, A_LCTL, S_LOPT, D_LCMD, F_LSFT,    KC_G,                                     KC_H,   J_RSFT, K_RCMD,  L_ROPT, SCLN_RCTL, CTL_QUOT,
-     KC_LSFT,   KC_Z,   KC_X,   KC_C,   KC_V,    KC_B, FKEYS,  FKEYS,    FKEYS, ADJUST,    KC_N,    KC_M,  KC_COMM, KC_DOT,   KC_SLSH,  KC_RSFT,
-                              ADJUST, KC_APP, KC_LGUI,   SYM, KC_SPC, KC_ENTER,    NAV, KC_BSPC, KC_RGUI,LGUI(KC_W)
+     _______,   KC_Q,   KC_W,   KC_E,   KC_R,    KC_T,                                     KC_Y,     KC_U,   KC_I,    KC_O,      KC_P,_______,
+     _______, A_LCTL, S_LOPT, D_LCMD, F_LSFT,    KC_G,                                     KC_H,   J_RSFT, K_RCMD,  L_ROPT, SCLN_RCTL,_______,
+     _______,   KC_Z,   KC_X,   KC_C,   KC_V,    KC_B, _______, _______, _______, _______, KC_N,    KC_M,  KC_COMM, KC_DOT,   KC_SLSH,_______,
+                              _______, _______,_______,    SYM, KC_SPC, KC_ENTER,    NAV,_______,_______,_______
     ),
 
 /*
@@ -82,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, _______, KC_EXLM, KC_AT,   KC_HASH, _______,                                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_VOLU, _______,
-      _______, _______, KC_DLR,  KC_PERC, KC_CIRC, _______,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, _______,
-      _______, _______, KC_AMPR, KC_ASTR, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+      _______, KC_QUOT, KC_EXLM, KC_AT,   KC_HASH, _______,                                     KC_PGUP,       KC_HOME,      KC_UP,         KC_END,         KC_VOLU, _______,
+      _______, _______, KC_DLR,  KC_PERC, KC_CIRC, _______,                                     KC_PGDN,       KC_LEFT,      KC_DOWN,       KC_RGHT,        KC_VOLD, _______,
+      _______, _______, KC_AMPR, KC_ASTR, KC_DQUO, _______, _______, _______, _______, _______, LCTL(KC_SLSH), LCS(KC_SLSH), LCTL(KC_LEFT), LCTL(KC_RIGHT), _______, _______, 
+                                 _______, _______, _______, _______, _______,  KC_DEL,  _______, _______, _______, _______
     ),
 
 /*
@@ -103,31 +101,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM] = LAYOUT(
-      KC_GRV , KC_EXLM,   KC_1 ,   KC_2 ,  KC_3, KC_PIPE,                                     KC_LPRN, KC_RPRN, KC_GRAVE,KC_BSLS, KC_PLUS, KC_UNDS,
-     _______ , _______,   KC_4 ,   KC_5,   KC_6, KC_MINS,                                     KC_LCBR, KC_RCBR, KC_TILD, KC_SLSH, KC_EQL,  KC_PIPE,
-     _______ , _______,   KC_7 ,   KC_8,   KC_9, KC_UNDS,  _______, _______, _______, KC_RCBR,KC_LBRC, KC_RBRC, KC_LT,   KC_GT,   KC_QUES, KC_DQUO,
-                                   _______,KC_0, _______, _______, _______, _______, _______, _______, _______, LGS(KC_T)
-    ),
-
-/*
- * Function Layer: Function keys
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  F5  |  F6  |  F7  |  F8  |      |                              |      | Shift| Ctrl |  Alt |  GUI |        |
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |      |      |      |      |        |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_FUNCTION] = LAYOUT(
-      KC_GRAVE, KC_EXLM, KC_AT ,  KC_HASH, KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR,  KC_RPRN, KC_RPRN, KC_UNDS,
-        KC_F1,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,  KC_F6 ,                                     KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11,  KC_F12,
-      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+     _______ , KC_ESC,   KC_1 ,   KC_2 ,  KC_3, KC_PIPE,                                     KC_LPRN, KC_RPRN, KC_GRAVE,KC_BSLS, KC_PLUS, KC_UNDS,
+     _______ , KC_TAB,   KC_4 ,   KC_5,   KC_6, KC_MINS,                                     KC_LCBR, KC_RCBR, KC_TILD, KC_SLSH, KC_EQL,  KC_PIPE,
+     _______ ,   KC_0,   KC_7 ,   KC_8,   KC_9, KC_UNDS,  _______, _______, _______, KC_RCBR,KC_LBRC, KC_RBRC, KC_LT,   KC_GT,   KC_QUES, KC_DQUO,
+                               _______, _______, _______, _______, _______, KC_BSPC, _______, _______, _______, LGS(KC_T)
     ),
 
 /*
@@ -145,10 +122,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                    _______, ALLMOD(KC_U), ALLMOD(KC_I),    ALLMOD(KC_O),   _______, _______,
-      _______, _______, _______, _______, _______, _______,                                    RGB_TOG, ALLMOD(KC_J), ALLMOD(KC_K),    ALLMOD(KC_L),   RGB_MOD, _______,
-      _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, ALLMOD(KC_M), ALLMOD(KC_COMM), ALLMOD(KC_DOT), RGB_RMOD, _______,
-                                 _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
+      _______, KC_F1, KC_F2,  KC_F3,  KC_F4,  RGB_TOG,                                    ALLMOD(KC_U), ALLMOD(KC_I),    ALLMOD(KC_O),   KC_BRMU, KC_VOLU, _______,
+      _______, KC_F5, KC_F6,  KC_F7,  KC_F8,  RGB_MOD,                                    ALLMOD(KC_J), ALLMOD(KC_K),    ALLMOD(KC_L),   KC_BRMD, KC_VOLD, _______,
+      _______, KC_F9, KC_F10, KC_F11, KC_F12, RGB_HUI,_______, _______, _______, _______, ALLMOD(KC_M), ALLMOD(KC_COMM), ALLMOD(KC_DOT), KC_CAPS, _______, _______,
+                            _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
 
 // /*
@@ -251,8 +228,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch(get_highest_layer(layer_state)) {
            case _QWERTY:
-             if (clockwise) tap_code16(LCTL_T(KC_SLSH));
-             else tap_code16(C_S_T(KC_SLSH));
+             if (clockwise) tap_code16(LCTL(KC_SLSH));
+             else tap_code16(LCS(KC_SLSH));
              break;
            case _SYM:
              if (clockwise) tap_code16(LCTL_T(KC_LEFT));
