@@ -81,8 +81,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, KC_QUOT, KC_EXLM, KC_AT,   KC_HASH, _______,                                     KC_PGUP,       KC_HOME,      KC_UP,         KC_END,         KC_VOLU, _______,
-      _______, _______, KC_DLR,  KC_PERC, KC_CIRC, _______,                                     KC_PGDN,       KC_LEFT,      KC_DOWN,       KC_RGHT,        KC_VOLD, _______,
+      _______, KC_QUOT, KC_EXLM, KC_AT,   KC_HASH, _______,                                     KC_PGUP,       LCS(KC_TAB),  KC_UP,         LCTL(KC_TAB),   KC_HOME, _______,
+      _______, _______, KC_DLR,  KC_PERC, KC_CIRC, _______,                                     KC_PGDN,       KC_LEFT,      KC_DOWN,       KC_RGHT,        KC_END,  _______,
       _______, _______, KC_AMPR, KC_ASTR, KC_DQUO, _______, _______, _______, _______, _______, LCTL(KC_SLSH), LCS(KC_SLSH), LCTL(KC_LEFT), LCTL(KC_RIGHT), _______, _______, 
                                  _______, _______, _______, _______, _______, _______,  KC_DEL, _______, _______, _______
     ),
@@ -166,7 +166,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
+  //    if (is_keyboard_master()) {
+    if (true) {  
         // QMK Logo and version information
         // clang-format off
         static const char PROGMEM qmk_logo[] = {
@@ -176,7 +177,7 @@ bool oled_task_user(void) {
         // clang-format on
 
         oled_write_P(qmk_logo, false);
-        oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+        oled_write_P(PSTR("@therealdatabass\n\n"), false);
 
         // Host Keyboard Layer Status
         oled_write_P(PSTR("Layer: "), false);
@@ -238,7 +239,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
              else tap_code(KC_VOLU);
              break;
         }
-    } else if (index == 1) {
+    } else  {
         switch(get_highest_layer(layer_state)) {
            case _QWERTY:
              if (clockwise) tap_code(KC_PGUP);
@@ -259,3 +260,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return false;
 }
 #endif
+
+
+void keyboard_pre_init_user(void) {
+  // Set our LED pin as output
+  setPinOutput(24);
+  // Turn the LED off
+  // (Due to technical reasons, high is off and low is on)
+  writePinHigh(24);
+}
